@@ -4,7 +4,7 @@ st.title("buy your wallet!!")
 
 number = st.number_input("Enter the quantity of wallets, $20 each",min_value=0, max_value=10, step=1, key="wallets")
 price_of_wallet = number*20
-customise = ['engraving', 'material']
+customise = ['size', 'engraving', 'material']
 for item in customise:
     st.write('customisation :', item)
     
@@ -16,8 +16,18 @@ if "engraving_pressed" not in st.session_state:
 if st.button("Customise your wallet"):
     st.session_state.customise_pressed = True
 
+
 amount_of_wallet = number
-if amount_of_wallet > 0 and st.session_state.customise_pressed:
+if amount_of_wallet > 0 and st.session_state.customise_pressed:    
+    st.image("wallet.jpg", caption = small)
+    size=st.selectbox("Select a size", ["small", "medium", "large"])
+    if size == "medium":
+        st.write("For medium add 10")
+        price_of_wallet+=10
+    if size == "large":
+        st.write("For large add 20")
+        price_of_wallet+=20
+
     choice = st.selectbox("Select one material", ["leather", "nylon", "canvas"])
 
     if choice == "leather":
